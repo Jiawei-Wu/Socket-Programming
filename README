@@ -1,0 +1,54 @@
+a. Name: Jiawei Wu
+b. Student ID: 9600392575
+c. What have I done in this assignment:
+   I have finished all the requirements in the socket programming project. In phase1, all three server programs boot up, the client reads input file and sends it to the edge server using TCP connection. In phase2, the edge server relays the data to the corresponding backedn server using UDP connection, two backend server complete the operation of the binary numbers. In phase3, the backend servers send computation results to the edge server using UDP connection and the edge server forward the result to the client using TCP.
+d. What your code files are and what each one of them does:
+   client.c: It will read file and send data to the edge server using TCP connection. After calculation, it will receive the result and show on the screen.
+   edge.c: It will receive data from client and send them to the corresponding backend server using UDP connection. After calculation, it will receive results from backend servers using UDP connection and forward results to the client using TCP connection. 
+   server_and.c: It will only get data with and operation from edge server using UDP connection. After calculation, it will send results to edge server using UDP connection.
+   server_or.c: It will only get data wiht or operation from edge server using UDP connection. After calculation, it will send results to edge server using UDP connection.  
+e. What the TA should do to run the programs
+   1.First you should open four different terminals and use one of them to type "make all" to compile all the file.
+   2.typing "make server_or" using one termial to run server_and.
+   3.typing "make server_and" using one terminal to run server_or.
+   4.typing "make edge" using one terminal to run edge.
+   5.typing "./client <input_file_name>" using one terminal to run client.
+f. The format of all the massages exchanged.
+   1.server_and:
+   The Server AND is up and running using UDP on port 22575.
+   The Server AND start receiving lines from the edge server for AND computation.
+   The computation results are:
+   <binary string 1> and <binary string 2> = <"AND" computation result>
+   ...
+   The Server AND has successfully received <count> lines from the edge server and finished all AND computations. 
+   The Server AND has successfully finished sending all computation results to the edge server.
+   2.server_or:
+   The Server OR is up and running using UDP on port 21575.
+   The Server OR start receiving lines from the edge server for AND computation.
+   The computation results are:
+   <binary string 1> or <binary string 2> = <"OR" computation result>
+   ...
+   The Server OR has successfully received <count> lines from the edge server and finished all OR computations. 
+   The Server OR has successfully finished sending all computation results to the edge server.
+   3.edge:
+   The edge server is up and running.
+   The edge server has received <count> lines from the client using TCP over port 23575.
+   The edge has successfully sent <count> lines to Backend-Server OR.
+   The edge has successfully sent <count> lines to Backend-Server AND.
+   The edge server start receiving the computation results from Backend-Server OR and Backend-Server OR using UDP over port 24575.
+   The computation results are:
+   <binary string 1> and <binary string 2> = <"AND" computation result>
+   <binary string 1> or <binary string 2> = <"OR" computation result>
+   The edge server has successfully finished receiving all computation results from Backend-Server OR and Backend-Server And.
+   The edge server has successfully finished sending all computation results to the client.
+   4.client
+   The client is up and running
+   The client has successfully finished sending <count> lines to the edge server.
+   The client has successfully finished receiving all computation results from the edge server.
+   The final computation result are:
+   <computation result>
+   ...
+g. Any idiosyncrasy of your project. It should say under what conditions the project fails,if any.
+   In my test case, I have not found any fail.
+h. Reused Code:
+   Some code block for setting TCP and UDP are from "Beej's Guide to Network Programming -- Using Internet Sockets".
